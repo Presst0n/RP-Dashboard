@@ -27,7 +27,7 @@ namespace ResPublica.UILibrary.Api
 
         public BattleNetApiHelper()
         {
-            _clientID = ConfigurationManager.AppSettings.Get("BlizzardApiLogin");
+            _clientID = ConfigurationManager.AppSettings.Get("BlizzardApiId");
             _clientSecret = ConfigurationManager.AppSettings.Get("BlizzardApiPassword");
         }
 
