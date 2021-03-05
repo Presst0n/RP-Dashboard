@@ -1,0 +1,104 @@
+﻿<UserControl x:Class="ResPublicaDashboard.Views.SplashView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ResPublicaDashboard.Views"
+             xmlns:cal="http://www.caliburnproject.org"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             mc:Ignorable="d" FontSize="18"
+             d:DesignHeight="450" d:DesignWidth="800" Background="white">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        
+        <Grid.Resources>
+            <sys:Double x:Key="ZOpacity">0</sys:Double>
+
+            <Storyboard x:Key="TransparencyFull">
+                <DoubleAnimation Storyboard.TargetProperty="(UIElement.Opacity)" From="0" To="1" Duration="0:0:05"/>
+            </Storyboard>
+            <Storyboard x:Key="TransparencyZero">
+                <DoubleAnimation Storyboard.TargetProperty="(UIElement.Opacity)" From="1" To="0" Duration="0:0:02"/>
+            </Storyboard>
+            <Storyboard x:Key="TransparencyFull2">
+                <DoubleAnimation Storyboard.TargetProperty="(UIElement.Opacity)" From="0" To="1" Duration="0:0:06"/>
+            </Storyboard>
+
+            <Style x:Key="TransparentStyle" TargetType="{x:Type Button}">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="Transparent">
+                                <ContentPresenter>
+
+                                </ContentPresenter>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </Grid.Resources>
+
+        <StackPanel x:Name="Stack1" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Opacity="0">
+            <StackPanel.Style>
+                <Style TargetType="StackPanel">
+                    <Style.Triggers>
+                        <Trigger Property="Opacity" Value="0">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard Storyboard="{StaticResource TransparencyFull}"/>
+                            </Trigger.EnterActions>
+                        </Trigger>
+                        <Trigger Property="Opacity" Value="1">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard Storyboard="{StaticResource TransparencyZero}"/>
+                            </Trigger.EnterActions>
+                        </Trigger>
+
+                    </Style.Triggers>
+                </Style>
+            </StackPanel.Style>
+
+
+            <TextBlock Text="" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" FontSize="28" FontFamily="Segoe UI" 
+                   FontWeight="Normal" FontStyle="Normal" Margin="0 0 0 0">
+                   Welcome in<LineBreak/>Res Publica Dashboard
+            </TextBlock>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Opacity="0">
+            <StackPanel.Style>
+                <Style TargetType="StackPanel">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Opacity, ElementName=Stack1}" Value="1">
+                            <DataTrigger.EnterActions>
+                                <BeginStoryboard Storyboard="{StaticResource TransparencyFull}"/>
+                            </DataTrigger.EnterActions>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </StackPanel.Style>
+
+
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" FontSize="28" FontFamily="Segoe UI" 
+                   FontWeight="Normal" FontStyle="Normal" Margin="0 0 0 0">
+                   Please Log In<LineBreak/>via Battle.net
+            </TextBlock>
+            <Image Source="/Resources/Images/bnet.png" Height="48" Width="48" SnapsToDevicePixels="True" />
+            <!--<Button Style="{StaticResource TransparentStyle}" x:Name="LogInWithBnet" Background="Transparent" Height="48" Width="48" BorderThickness="0">
+
+            </Button>-->
+        </StackPanel>
+           
+    </Grid>
+</UserControl>
