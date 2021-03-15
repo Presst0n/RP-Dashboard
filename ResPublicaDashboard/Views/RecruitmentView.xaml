@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ResPublicaDashboard.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" Background="White">
+             d:DesignHeight="800" d:DesignWidth="1200" Background="White">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
@@ -154,26 +154,83 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Label Grid.Row="0" Grid.Column="0" Width="auto" HorizontalAlignment="Left">Nick:</Label>
-            <TextBox Grid.Column="1" Grid.Row="0" Width="100" Margin="0,0,0,0" />
+            <TextBox Grid.Column="1" Grid.Row="0" Width="100" Margin="0,0,0,0" TextAlignment="Center" VerticalContentAlignment="Center" />
             <Label Grid.Column="2" Grid.Row="0" Width="auto" HorizontalAlignment="Left">Klasa:</Label>
-            <TextBox Grid.Row="0" Grid.Column="3" Width="100" Margin="0,0,0,0" />
+            <!--<TextBox Grid.Row="0" Grid.Column="3" Width="100" Margin="0,0,0,0" TextAlignment="Center" VerticalContentAlignment="Center" />-->
+            <!--<ComboBox ItemsSource="{Binding WowClasses}" DisplayMemberPath="ClassName" SelectedItem="{Binding SelectedPlayerClass}" Grid.Row="0" Grid.Column="3" Width="100" 
+                      VerticalContentAlignment="Center" Text="Choose class" />-->
+
+            <ComboBox ItemsSource="{Binding WowClasses}" DisplayMemberPath="ClassName" SelectedItem="{Binding SelectedPlayerClass}" Grid.Row="0" Grid.Column="3" Width="100" 
+                      VerticalContentAlignment="Center">
+                <ComboBox.Template>
+                    <ControlTemplate TargetType="ComboBox">
+                        <Grid>
+                            <ComboBox x:Name="cbItems" DisplayMemberPath="ClassName" VerticalContentAlignment="Center" DataContext="{Binding RelativeSource={RelativeSource TemplatedParent}}" ItemsSource="{Binding ItemsSource, RelativeSource={RelativeSource TemplatedParent}}"
+                                      SelectedValue ="{Binding SelectedValue, RelativeSource={RelativeSource TemplatedParent}}" />
+                            <TextBlock x:Name="tbItem" Text="Select Class" IsHitTestVisible="False" Visibility="Hidden" Padding="6"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger SourceName="cbItems" Property="SelectedItem" Value="{x:Null}">
+                                <Setter TargetName="tbItem" Property="Visibility" Value="Visible" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </ComboBox.Template>
+            </ComboBox>
+
             <Label Grid.Row="0" Grid.Column="4" Width="auto" HorizontalAlignment="Left">Spec:</Label>
-            <TextBox Grid.Row="0" Grid.Column="5" Width="100" AcceptsReturn="True" />
+            <!--<TextBox Grid.Row="0" Grid.Column="5" Width="100" AcceptsReturn="True" TextAlignment="Center" VerticalContentAlignment="Center" />-->
+            <!--<ComboBox x:Name="SpecBox" ItemsSource="{Binding Specializations}" SelectedItem="{Binding SelectedSpecialization}" Grid.Row="0" Grid.Column="5" Width="100" 
+                      VerticalContentAlignment="Center">
+                -->
+            <!--<TextBlock Text="Select Spec" IsHitTestVisible="False">
+                    <TextBlock.Style>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Visibility" Value="Hidden"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=SpecBox, Path=SelectedItem}" Value="{x:Null}">
+                                    <Setter Property="Visibility" Value="Hidden"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>-->
+            <!--
+            </ComboBox>-->
+
+            <ComboBox ItemsSource="{Binding Specializations}" SelectedItem="{Binding SelectedSpecialization}" Grid.Row="0" Grid.Column="5" Width="100" 
+                      VerticalContentAlignment="Center">
+                <ComboBox.Template>
+                    <ControlTemplate TargetType="ComboBox">
+                        <Grid>
+                            <ComboBox x:Name="cbItems" VerticalContentAlignment="Center" DataContext="{Binding RelativeSource={RelativeSource TemplatedParent}}" ItemsSource="{Binding ItemsSource, RelativeSource={RelativeSource TemplatedParent}}"
+                                      SelectedValue ="{Binding SelectedValue, RelativeSource={RelativeSource TemplatedParent}}" />
+                            <TextBlock x:Name="tbItem" Text="Select Spec" IsHitTestVisible="False" Visibility="Hidden" Padding="6"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger SourceName="cbItems" Property="SelectedItem" Value="{x:Null}">
+                                <Setter TargetName="tbItem" Property="Visibility" Value="Visible" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </ComboBox.Template>
+            </ComboBox>
 
             <Label Grid.Row="0" Grid.Column="6" Width="auto" HorizontalAlignment="Left">Wowprogress:</Label>
-            <TextBox Grid.Row="0" Grid.Column="7" Width="100" AcceptsReturn="True" />
+            <TextBox Grid.Row="0" Grid.Column="7" Width="100" AcceptsReturn="True" TextAlignment="Center" VerticalContentAlignment="Center" />
 
             <Label Grid.Row="1" Grid.Column="2" Width="auto" HorizontalAlignment="Left" Margin="0 3 0 0">Battletag:</Label>
-            <TextBox Grid.Row="1" Grid.Column="3" Width="100" Margin="0 3 0 0" AcceptsReturn="True" />
+            <TextBox Grid.Row="1" Grid.Column="3" Width="100" Margin="0 3 0 0" AcceptsReturn="True" TextAlignment="Center" VerticalContentAlignment="Center" />
 
             <Label Grid.Row="1" Grid.Column="4" Width="auto" Margin="0 3 0 0" HorizontalAlignment="Left">Kto:</Label>
-            <TextBox Grid.Row="1" Grid.Column="5" Width="100" Margin="0 3 0 0" AcceptsReturn="True" />
+            <TextBox Grid.Row="1" Grid.Column="5" Width="100" Margin="0 3 0 0" AcceptsReturn="True" TextAlignment="Center" VerticalContentAlignment="Center" />
 
 
         </Grid>
-        
+
         <Grid Grid.Row="4" Grid.Column="0" Margin="50 3 50 0">
             <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
@@ -183,7 +240,8 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Label Grid.Row="0" Grid.Column="1" Width="auto" Margin="0 0 0 0" HorizontalAlignment="Center">Komentarz:</Label>
-            <TextBox Grid.Row="1" Grid.Column="1" Width="auto" Height="65" Margin="0 0 0 0" AcceptsReturn="True" />
+            <TextBox Grid.Row="1" Grid.Column="1" Width="auto" Height="100" Margin="0 0 0 0" AcceptsReturn="True" VerticalAlignment="Center" VerticalScrollBarVisibility="Auto"/>
+            <Button x:Name="AddRecruit" Grid.Column="1" Grid.Row="2" Content="Add" Margin="0 10 0 0" Height="30" Width="75" Background="GhostWhite" />
         </Grid>
     </Grid>
 </UserControl>
